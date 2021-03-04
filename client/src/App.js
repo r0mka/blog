@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import Landing from './components/layout/Landing';
 import Routes from './components/routing/Routes';
 
