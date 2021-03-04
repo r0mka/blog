@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-// @route   GET api/auth
+// @route   GET api/users
 // @desc    Test route
 // @access  Public
 router.get('/', (req, res) => {
-  res.send('Auth route');
+  res.send('User route');
 });
 
 module.exports = router;

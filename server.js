@@ -2,9 +2,17 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+const usersRoutes = require('./routes/api/users');
+
 app.get('/api', (req, res) => {
   res.json({ msg: 'Hello world! This is my bloggin app' });
 });
+
+// Routes
+app.use('/api/users', usersRoutes);
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
