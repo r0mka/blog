@@ -1,7 +1,15 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import Landing from './components/layout/Landing';
+import Routes from './components/routing/Routes';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -15,13 +23,17 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-
-          <h1>{this.state.msg ? this.state.msg : ''}</h1>
-        </header>
-      </div>
+      // <Provider store={store}>
+      <Router>
+        <React.Fragment>
+          {/* <Navbar /> */}
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route component={Routes} />
+          </Switch>
+        </React.Fragment>
+      </Router>
+      // </Provider>
     );
   }
 }
