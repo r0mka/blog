@@ -6,10 +6,7 @@ const connectDB = require('./connectDB');
 
 // Connect Database
 connectDB();
-
-app.get('/api', (req, res) => {
-  res.json({ msg: 'Hello world! This is my bloggin app' });
-});
+app.use(express.json());
 
 // Routes
 app.use('/api/users', require('./routes/api/users'));
