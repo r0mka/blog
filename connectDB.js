@@ -2,9 +2,6 @@ const mongoose = require('mongoose');
 
 const connectionString = process.env.MONGO_CONNECTION_STRING;
 
-// const connectionString =
-//   'mongodb+srv://roman:4mVpptHF3xA0fRGg@cluster0.5yfea.mongodb.net/dataBase?retryWrites=true&w=majority';
-
 const options = {
   useUnifiedTopology: true,
   useCreateIndex: true,
