@@ -1,15 +1,20 @@
 const express = require('express');
-const path = require('path');
 const app = express();
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const usersRoutes = require('./routes/api/users');
+const connectDB = require('./connectDB');
+
+// Connect Database
+connectDB();
 
 app.get('/api', (req, res) => {
   res.json({ msg: 'Hello world! This is my bloggin app' });
 });
 
 // Routes
-app.use('/api/users', usersRoutes);
+app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
