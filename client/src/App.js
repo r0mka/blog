@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
+
+import store from './store';
+
+import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Routes from './components/routing/Routes';
 
@@ -16,24 +19,20 @@ class App extends Component {
     super(props);
     this.state = { msg: null };
   }
-  componentDidMount() {
-    axios
-      .get('/api')
-      .then((res) => this.setState({ msg: res.data.msg }));
-  }
+
   render() {
     return (
-      // <Provider store={store}>
-      <Router>
-        <React.Fragment>
-          {/* <Navbar /> */}
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={Routes} />
-          </Switch>
-        </React.Fragment>
-      </Router>
-      // </Provider>
+      <Provider store={store}>
+        <Router>
+          <React.Fragment>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route component={Routes} />
+            </Switch>
+          </React.Fragment>
+        </Router>
+      </Provider>
     );
   }
 }
