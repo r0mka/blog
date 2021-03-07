@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
-
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types';
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -21,11 +22,13 @@ class Register extends React.Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.password !== this.state.password2) {
+    const { name, email, password, password2 } = this.state;
+    const { register, setAlert } = this.state;
+
+    if (password !== password2) {
       this.props.setAlert('Passwords do not match', 'danger');
     } else {
-      //   register({ name, email, password });
-      console.log('SUCCESS');
+      this.props.register({ name, email, password });
     }
   };
 
@@ -78,4 +81,11 @@ class Register extends React.Component {
     );
   }
 }
-export default connect(null, { setAlert })(Register);
+
+// Register.propTypes = {
+//   setAlert: PropTypes.func.isRequired,
+//   register: PropTypes.func.isRequired,
+//   isAuthenticated: PropTypes.bool,
+// };
+
+export default connect(null, { setAlert, register })(Register);
