@@ -11,16 +11,7 @@ class Alert extends React.Component {
     const { alerts } = this.props;
     if (alerts !== null && alerts.length > 0) {
       return alerts.map((alert) => (
-        <div
-          className="alert danger"
-          style={{
-            height: '40px',
-            background: 'red',
-            color: 'white',
-            textTransform: 'uppercase',
-          }}
-          key={alert.id}
-        >
+        <div className="alert danger" key={alert.id}>
           {alert.msg}
         </div>
       ));

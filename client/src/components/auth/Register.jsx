@@ -23,12 +23,12 @@ class Register extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, password2 } = this.state;
-    const { register, setAlert } = this.state;
+    const { register, setAlert } = this.props;
 
     if (password !== password2) {
-      this.props.setAlert('Passwords do not match', 'danger');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      this.props.register({ name, email, password });
+      register({ name, email, password });
     }
   };
 
