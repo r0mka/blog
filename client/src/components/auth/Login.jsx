@@ -1,12 +1,55 @@
 import React from 'react';
+import { login } from '../../actions/auth';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+  onChange = (e) => {
+    this.setState((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  onSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = this.state;
+    this.props.login(email, password);
+  };
 
-export default class Login extends React.Component {
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
-      <form>
-        <input type="email" placeholder="email" />
-        <input type="password" placeholder="password" />
+      <form onSubmit={this.onSubmit}>
+        <input
+          type="email"
+          placeholder="email"
+          onChange={this.onChange}
+          value={this.state.email}
+          name="email"
+        />
+        <input
+          type="password"
+          placeholder="password"
+          onChange={this.onChange}
+          value={this.state.password}
+          name="password"
+        />
+        <input type="submit" />
       </form>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

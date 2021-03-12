@@ -13,13 +13,25 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+import { LOGOUT } from './actions/types';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { msg: null };
   }
 
+  componentDidMount() {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    store.dispatch(loadUser());
+    // log user out from all tabs if they log out in one tab
+    window.addEventListener('storage', () => {
+      if (!localStorage.token) store.dispatch({ type: LOGOUT });
+    });
+  }
   render() {
     return (
       <Provider store={store}>
