@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import setAuthToken from '../utils/setAuthToken';
+
 import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
@@ -15,7 +15,6 @@ import {
 export const loadUser = () => async (dispatch) => {
   try {
     const res = await api.get('/auth');
-
     dispatch({
       type: USER_LOADED,
       payload: res.data,

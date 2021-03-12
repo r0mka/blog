@@ -8,6 +8,7 @@ import {
   LOGOUT,
   ACCOUNT_DELETED,
 } from '../actions/types';
+import setAuthToken from '../utils/setAuthToken';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -29,7 +30,8 @@ function authReducer(state = initialState, action) {
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload.token);
+      setAuthToken(payload.token);
+
       return {
         ...state,
         ...payload,
@@ -46,7 +48,7 @@ function authReducer(state = initialState, action) {
       };
     case AUTH_ERROR:
     case LOGOUT:
-      localStorage.removeItem('token');
+      setAuthToken(null);
       return {
         ...state,
         token: null,

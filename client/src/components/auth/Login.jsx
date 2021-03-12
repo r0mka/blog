@@ -2,6 +2,7 @@ import React from 'react';
 import { login } from '../../actions/auth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +48,10 @@ class Login extends React.Component {
     );
   }
 }
-
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
